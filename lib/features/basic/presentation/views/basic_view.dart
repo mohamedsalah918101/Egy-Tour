@@ -1,0 +1,1 @@
+// here we write the basic scaffold for all other pages
