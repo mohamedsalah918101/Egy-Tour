@@ -12,13 +12,13 @@ extension NavigationExtensions on BuildContext {
       reverseTransitionDuration: reverseTransationDuration,
       // add the page where we navigate
       pageBuilder: (context, animation, secondaryAnimation) => page,
-      // add transation for the page we set here fade transation accoring to requirement
+      // add transation for the page we set here fade transation according to requirement
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         // while navigate to we set navigated to page with fade in the take the first animation.
         var fadeIn = Tween(begin: 0.0, end: 1.0).animate(
           CurvedAnimation(parent: animation, curve: curve),
         );
-        // while navigate to we set currento page with fade out the take the second animation.
+        // while navigate to we set current page with fade out the take the second animation.
 
         var fadeOut = Tween(begin: 1.0, end: 0.0).animate(
           CurvedAnimation(parent: secondaryAnimation, curve: curve),
