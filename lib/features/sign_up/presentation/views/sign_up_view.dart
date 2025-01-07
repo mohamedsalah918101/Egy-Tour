@@ -1,3 +1,4 @@
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:egy_tour/core/utils/theme/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -108,111 +109,183 @@ class _SignUpViewState extends State<SignUpView> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     spacing: 20,
                     children: [
-                      TextFormField(
-                        controller: nameController,
-                        decoration: InputDecoration(
-                            labelText: 'signup.username'.tr(),
+                      Material(
+                        elevation: 4,
+                        shadowColor: Colors.grey,
+                        borderRadius: BorderRadius.circular(12),
+                        color: Colors.white,
+                        child: TextFormField(
+                          controller: nameController,
+                          decoration: InputDecoration(
+                              labelText: 'signup.username'.tr(),
+                              labelStyle: TextStyle(color: Colors.grey),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              prefixIcon: Icon(
+                                Icons.person,
+                                color: Colors.grey,
+                              )),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your full name';
+                            }
+                            if (value[0] != value[0].toUpperCase()) {
+                              return 'First letter must be capitalized';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+
+                      Material(
+                        elevation: 4,
+                        shadowColor: Colors.grey,
+                        borderRadius: BorderRadius.circular(12),
+                        color: Colors.white,
+                        child: TextFormField(
+                          controller: emailController,
+                          decoration: InputDecoration(
+                              labelText: 'signup.email'.tr(),
+                              labelStyle: TextStyle(color: Colors.grey),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              prefixIcon: Icon(
+                                Icons.email,
+                                color: Colors.grey,
+                              )),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your email';
+                            }
+                            if (!value.contains('@')) {
+                              return 'Email must contain @';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.black),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 4,
+                          offset: Offset(2, 4),
+                        )
+                      ]
+                    ),
+                    child: Row(
+                      children: [
+                        // Phone Icon
+                        Padding(
+                          padding: const EdgeInsets.only(left: 9),
+                          child: Icon(Icons.phone_android, color: Colors.grey, size: 24),
+                        ),
+
+                        // Country Code
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          margin: const EdgeInsets.symmetric(horizontal: 4),
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: const Text(
+                            '+20',
+                            style: TextStyle(color: Colors.white, fontSize: 14),
+                          ),
+                        ),
+
+                        // Phone Input
+                        Expanded(
+                          child: TextFormField(
+                            controller: phoneController,
+                            keyboardType: TextInputType.phone,
+                            decoration: InputDecoration(
+                              labelText: 'signup.phone'.tr(),
+                              labelStyle: TextStyle(color: Colors.grey),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: BorderSide(color: Colors.transparent),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: BorderSide(color: Colors.transparent), // Transparent border when not focused
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: BorderSide(color: Colors.transparent), // Transparent border when focused
+                              ),
+                              contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                            ),
+                          ),
+                        ),
+
+                        // Country Picker
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey.shade200),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: CountryCodePicker(
+                            initialSelection: 'EG',
+                            showCountryOnly: true,
+                            showOnlyCountryWhenClosed: true,
+                            favorite: const ['EG'],
+                            padding: EdgeInsets.zero,
+                            flagWidth: 24,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                      Material(
+                        elevation: 4,
+                        shadowColor: Colors.grey,
+                        borderRadius: BorderRadius.circular(12),
+                        color: Colors.white,
+                        child: TextFormField(
+                          controller: passwordController,
+                          obscureText: hiddenPassword,
+                          decoration: InputDecoration(
+                            labelText: 'signup.password'.tr(),
                             labelStyle: TextStyle(color: Colors.grey),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
                             prefixIcon: Icon(
-                              Icons.person,
+                              Icons.lock,
                               color: Colors.grey,
-                            )),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your full name';
-                          }
-                          if (value[0] != value[0].toUpperCase()) {
-                            return 'First letter must be capitalized';
-                          }
-                          return null;
-                        },
-                      ),
-                      TextFormField(
-                        controller: emailController,
-                        decoration: InputDecoration(
-                            labelText: 'signup.email'.tr(),
-                            labelStyle: TextStyle(color: Colors.grey),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
                             ),
-                            prefixIcon: Icon(
-                              Icons.email,
-                              color: Colors.grey,
-                            )),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your email';
-                          }
-                          if (!value.contains('@')) {
-                            return 'Email must contain @';
-                          }
-                          return null;
-                        },
-                      ),
-
-                      TextFormField(
-                        controller: phoneController,
-                        keyboardType: TextInputType.phone,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(
-                            Icons.mobile_screen_share,
-                            color: Colors.grey,
-                          ),
-                          labelText: 'signup.phone'.tr(),
-                          labelStyle: TextStyle(color: Colors.grey),
-                          suffixIcon: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Image.asset('assets/images/egypt_flag.png', width: 30),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty || value.length < 11) {
-                            return 'Please enter your number correctly';
-                          }
-                          return null;
-                        },
-                      ),
-
-                      TextFormField(
-                        controller: passwordController,
-                        obscureText: hiddenPassword,
-                        decoration: InputDecoration(
-                          labelText: 'signup.password'.tr(),
-                          labelStyle: TextStyle(color: Colors.grey),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          prefixIcon: Icon(
-                            Icons.lock,
-                            color: Colors.grey,
-                          ),
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              togglePassword();
-                            },
-                            icon: Icon(
-                              hiddenPassword
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                              color: Colors.black,
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                togglePassword();
+                              },
+                              icon: Icon(
+                                hiddenPassword
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Colors.black,
+                              ),
                             ),
                           ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your password';
+                            }
+                            if (value.length < 6) {
+                              return 'Password must be at least 6 characters';
+                            }
+                            return null;
+                          },
                         ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your password';
-                          }
-                          if (value.length < 6) {
-                            return 'Password must be at least 6 characters';
-                          }
-                          return null;
-                        },
                       ),
                       SizedBox(
                         height: 25,
