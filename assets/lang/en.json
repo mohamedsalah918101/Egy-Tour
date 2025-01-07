@@ -1,0 +1,13 @@
+{
+  "signup": {
+    "title": "Create Account",
+    "subtitle": "With us, you'll discover Egypt like never before",
+    "username": "Username",
+    "email": "E-mail",
+    "phone": "Phone number",
+    "password": "Password",
+    "signup_button": "Sign Up",
+    "already_have_account": "Already have an Account?",
+    "login": "Login"
+  }
+}
