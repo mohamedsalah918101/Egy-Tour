@@ -1,6 +1,7 @@
 import 'package:egy_tour/core/utils/extensions/media_query.dart';
 import 'package:egy_tour/core/utils/theme/app_colors.dart';
 import 'package:egy_tour/core/utils/theme/font_styles.dart';
+import 'package:egy_tour/features/governments/presentation/views/government_view.dart';
 import 'package:flutter/material.dart';
 
 List<IconData> selectedIcons = [
@@ -16,9 +17,10 @@ List<IconData> unSelectedIcons = [
   Icons.favorite_outline,
   Icons.person_outlined,
 ];
+
 List<Widget> screens = [
   Text("screen1"),
-  Text("screen2"),
+  GovernmentView(),
   Text("screen3"),
   Text("screen4"),
 ];
@@ -54,7 +56,7 @@ class _BasicViewState extends State<BasicView> {
       body: Stack(
         children: [
           Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [Center(child: screens[selectedIndex])],
           ),
           Align(
