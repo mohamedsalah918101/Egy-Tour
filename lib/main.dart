@@ -2,10 +2,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:egy_tour/core/utils/constants/constant_variables.dart';
 import 'package:egy_tour/features/login/presentation/views/login_view.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  await Hive.initFlutter();
+  await Hive.openBox('userBox');
   runApp(
     EasyLocalization(
       supportedLocales: const [

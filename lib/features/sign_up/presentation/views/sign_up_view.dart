@@ -4,6 +4,7 @@ import 'package:egy_tour/core/utils/theme/app_colors.dart';
 import 'package:egy_tour/core/utils/widget/custom_snack_bar.dart';
 import 'package:egy_tour/features/login/presentation/views/login_view.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:page_transition/page_transition.dart';
 
 class SignUpView extends StatefulWidget {
@@ -38,7 +39,9 @@ class _SignUpViewState extends State<SignUpView> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               // Title
               Text(
                 'signup.title'.tr(),
@@ -137,13 +140,19 @@ class _SignUpViewState extends State<SignUpView> {
             items: [
               DropdownMenuItem(
                 value: 'en',
-                child: const Text('English',style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),),
+                child: const Text(
+                  'English',
+                  style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
+                ),
               ),
               DropdownMenuItem(
                 value: 'ar',
                 child: Padding(
                   padding: const EdgeInsets.only(right: 8.0),
-                  child: const Text('العربية', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),),
+                  child: const Text(
+                    'العربية',
+                    style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
             ],
@@ -152,7 +161,8 @@ class _SignUpViewState extends State<SignUpView> {
                 context.setLocale(Locale(value!)); // Update the state
               });
             },
-            underline: SizedBox(), // Remove default underline
+            underline: SizedBox(),
+            // Remove default underline
             isExpanded: true,
           ),
         ),
@@ -160,7 +170,7 @@ class _SignUpViewState extends State<SignUpView> {
     );
   }
 
-  Widget usernameField(){
+  Widget usernameField() {
     return Material(
       elevation: 4,
       shadowColor: Colors.grey,
@@ -234,8 +244,7 @@ class _SignUpViewState extends State<SignUpView> {
               blurRadius: 4,
               offset: Offset(2, 4),
             )
-          ]
-      ),
+          ]),
       child: Row(
         children: [
           // Phone Icon
@@ -272,11 +281,15 @@ class _SignUpViewState extends State<SignUpView> {
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.transparent), // Transparent border when not focused
+                  borderSide: BorderSide(
+                      color: Colors
+                          .transparent), // Transparent border when not focused
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.transparent), // Transparent border when focused
+                  borderSide: BorderSide(
+                      color: Colors
+                          .transparent), // Transparent border when focused
                 ),
                 contentPadding: const EdgeInsets.symmetric(horizontal: 16),
               ),
@@ -336,9 +349,7 @@ class _SignUpViewState extends State<SignUpView> {
               togglePassword();
             },
             icon: Icon(
-              hiddenPassword
-                  ? Icons.visibility
-                  : Icons.visibility_off,
+              hiddenPassword ? Icons.visibility : Icons.visibility_off,
               color: Colors.black,
             ),
           ),
@@ -365,17 +376,41 @@ class _SignUpViewState extends State<SignUpView> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18.0),
       child: ElevatedButton(
-        onPressed: ()  {
+        onPressed: () async {
           if (_formKey.currentState!.validate()) {
+            final box = Hive.box('userBox');
+            await box.put('user', {
+              'userName': nameController.text,
+              'email': emailController.text,
+              'password': passwordController.text,
+              'phoneNumber': phoneController.text
+            });
+            Navigator.pushReplacement(
+              context,
+              PageTransition(
+                type: PageTransitionType.rightToLeft,
+                alignment: Alignment.topCenter,
+                duration: Duration(milliseconds: 500),
+                child: LoginView(),
+              ),
+            );
           } else {
-            if (nameController.text.isEmpty || nameController.text[0] != nameController.text[0].toUpperCase()) {
-              showCustomSnackBar(context, "Full name must start with a capital letter", backgroundColor: AppColors.red);
+            if (nameController.text.isEmpty ||
+                nameController.text[0] !=
+                    nameController.text[0].toUpperCase()) {
+              showCustomSnackBar(
+                  context, "Full name must start with a capital letter",
+                  backgroundColor: AppColors.red);
             } else if (!emailController.text.contains('@')) {
-              showCustomSnackBar(context, "Email must contain @", backgroundColor: AppColors.red);
+              showCustomSnackBar(context, "Email must contain @",
+                  backgroundColor: AppColors.red);
             } else if (passwordController.text.length < 6) {
-              showCustomSnackBar(context, "Password must be at least 6 characters", backgroundColor: AppColors.red);
+              showCustomSnackBar(
+                  context, "Password must be at least 6 characters",
+                  backgroundColor: AppColors.red);
             } else if (phoneController.text.length < 10) {
-              showCustomSnackBar(context, "phone must be at least 10 numbers", backgroundColor: AppColors.red);
+              showCustomSnackBar(context, "phone must be at least 10 numbers",
+                  backgroundColor: AppColors.red);
             }
           }
         },
@@ -387,7 +422,8 @@ class _SignUpViewState extends State<SignUpView> {
         ),
         child: Text(
           'signup.signup_button'.tr(),
-          style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
         ),
       ),
     );
@@ -420,12 +456,10 @@ class _SignUpViewState extends State<SignUpView> {
                 color: Colors.deepPurple,
                 decoration: TextDecoration.underline,
                 fontWeight: FontWeight.w600,
-                fontSize: 16
-            ),
+                fontSize: 16),
           ),
         ),
       ],
     );
   }
-
 }

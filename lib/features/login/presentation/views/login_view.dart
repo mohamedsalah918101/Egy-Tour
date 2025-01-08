@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:egy_tour/features/sign_up/presentation/views/sign_up_view.dart';
+import 'package:egy_tour/features/sign_up/presentation/views/test_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../../../../core/utils/theme/app_colors.dart';
@@ -14,9 +16,7 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-
   final _formKey = GlobalKey<FormState>();
-  TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool hiddenPassword = true;
@@ -82,16 +82,16 @@ class _LoginViewState extends State<LoginView> {
                     // Welcome text
                     const SizedBox(height: 60),
 
-                     Center(
-                       child: Text(
-                         'login.welcome_title'.tr(),
+                    Center(
+                      child: Text(
+                        'login.welcome_title'.tr(),
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),
-                                         ),
-                     ),
+                      ),
+                    ),
                     const SizedBox(height: 8),
                     Text(
                       'login.welcome_subtitle'.tr(),
@@ -106,36 +106,34 @@ class _LoginViewState extends State<LoginView> {
                     const SizedBox(height: 40),
 
                     Form(
-                      key: _formKey,
-                        child: Padding(padding: EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          spacing: 20,
-                          children: [
-                            // Username Field
-                            usernameField(),
-                            // Password Field
-                            passwordField(),
+                        key: _formKey,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            spacing: 20,
+                            children: [
+                              // Username Field
+                              usernameField(),
+                              // Password Field
+                              passwordField(),
 
-                            SizedBox(
-                              height: 25,
-                            ),
+                              SizedBox(
+                                height: 25,
+                              ),
 
-                            // Sign Up Button
-                            loginButton(),
+                              // Sign Up Button
+                              loginButton(),
 
-                            SizedBox(
-                              height: 20,
-                            ),
+                              SizedBox(
+                                height: 20,
+                              ),
 
-                            // Already Have Account
-                            doNotHaveAccount()
-
-                          ],
-                        ),
-                        )
-                    ),
-
+                              // Already Have Account
+                              doNotHaveAccount()
+                            ],
+                          ),
+                        )),
                   ],
                 ),
               ),
@@ -163,13 +161,19 @@ class _LoginViewState extends State<LoginView> {
           items: [
             DropdownMenuItem(
               value: 'en',
-              child: const Text('English',style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),),
+              child: const Text(
+                'English',
+                style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
+              ),
             ),
             DropdownMenuItem(
               value: 'ar',
               child: Padding(
                 padding: const EdgeInsets.only(right: 8.0),
-                child: const Text('العربية', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),),
+                child: const Text(
+                  'العربية',
+                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+                ),
               ),
             ),
           ],
@@ -178,21 +182,22 @@ class _LoginViewState extends State<LoginView> {
               context.setLocale(Locale(value!)); // Update the state
             });
           },
-          underline: SizedBox(), // Remove default underline
+          underline: SizedBox(),
+          // Remove default underline
           isExpanded: true,
         ),
       ),
     );
   }
 
-  Widget usernameField(){
+  Widget usernameField() {
     return Material(
       elevation: 4,
       shadowColor: Colors.grey,
       borderRadius: BorderRadius.circular(12),
       color: Colors.white,
       child: TextFormField(
-        controller: nameController,
+        controller: emailController,
         decoration: InputDecoration(
             labelText: 'login.username'.tr(),
             labelStyle: TextStyle(color: Colors.grey),
@@ -205,10 +210,7 @@ class _LoginViewState extends State<LoginView> {
             )),
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return 'Please enter your full name';
-          }
-          if (value[0] != value[0].toUpperCase()) {
-            return 'First letter must be capitalized';
+            return 'Please enter your email';
           }
           return null;
         },
@@ -240,9 +242,7 @@ class _LoginViewState extends State<LoginView> {
               togglePassword();
             },
             icon: Icon(
-              hiddenPassword
-                  ? Icons.visibility
-                  : Icons.visibility_off,
+              hiddenPassword ? Icons.visibility : Icons.visibility_off,
               color: Colors.black,
             ),
           ),
@@ -269,15 +269,34 @@ class _LoginViewState extends State<LoginView> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18.0),
       child: ElevatedButton(
-        onPressed: ()  {
+        onPressed: () {
           if (_formKey.currentState!.validate()) {
+            final box = Hive.box('userBox');
+            final userData = box.get('user');
+            if (userData != null &&
+                userData['email'] == emailController.text &&
+                userData['password'] == passwordController.text) {
+              Navigator.pushReplacement(
+                context,
+                PageTransition(
+                  type: PageTransitionType.fade,
+                  alignment: Alignment.topCenter,
+                  duration: Duration(milliseconds: 500),
+                  child: TestScreen(),
+                ),
+              );
+            } else {
+              showCustomSnackBar(context, 'Invalid email or password',
+                  backgroundColor: AppColors.red);
+            }
           } else {
-            if (nameController.text.isEmpty || nameController.text[0] != nameController.text[0].toUpperCase()) {
-              showCustomSnackBar(context, "Full name must start with a capital letter", backgroundColor: AppColors.red);
-            } else if (!emailController.text.contains('@')) {
-              showCustomSnackBar(context, "Email must contain @", backgroundColor: AppColors.red);
+            if (!emailController.text.contains('@')) {
+              showCustomSnackBar(context, "Email must contain @",
+                  backgroundColor: AppColors.red);
             } else if (passwordController.text.length < 6) {
-              showCustomSnackBar(context, "Password must be at least 6 characters", backgroundColor: AppColors.red);
+              showCustomSnackBar(
+                  context, "Password must be at least 6 characters",
+                  backgroundColor: AppColors.red);
             }
           }
         },
@@ -289,7 +308,8 @@ class _LoginViewState extends State<LoginView> {
         ),
         child: Text(
           'login.login_button'.tr(),
-          style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
         ),
       ),
     );
@@ -322,13 +342,10 @@ class _LoginViewState extends State<LoginView> {
                 color: Colors.deepPurple,
                 decoration: TextDecoration.underline,
                 fontWeight: FontWeight.w600,
-                fontSize: 16
-            ),
+                fontSize: 16),
           ),
         ),
       ],
     );
   }
-
 }
-
