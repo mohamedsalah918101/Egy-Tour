@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:egy_tour/core/utils/constants/constant_variables.dart';
-import 'package:egy_tour/features/sign_up/presentation/views/sign_up_view.dart';
+import 'package:egy_tour/features/login/presentation/views/login_view.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      home: const SignUpView(),
+      home: const LoginView(),
     );
   }
 }

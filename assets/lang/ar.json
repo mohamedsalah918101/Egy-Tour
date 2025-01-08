@@ -9,5 +9,15 @@
     "signup_button": "تسجيل",
     "already_have_account": "هل لديك حساب؟",
     "login": "تسجيل الدخول"
+  },
+  "login": {
+    "app_name": "إيجي-تور",
+    "welcome_title": "مرحباً بك في مصر",
+    "welcome_subtitle": "معنا ستجد أفضل تجربة لاستكشاف عجائب مصر",
+    "username": "اسم المستخدم",
+    "password": "كلمة المرور",
+    "login_button": "تسجيل الدخول",
+    "no_account": "ليس لديك حساب؟",
+    "create": "إنشاء"
   }
 }

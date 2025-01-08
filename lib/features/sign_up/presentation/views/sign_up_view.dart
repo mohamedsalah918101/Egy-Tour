@@ -2,7 +2,9 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:egy_tour/core/utils/theme/app_colors.dart';
 import 'package:egy_tour/core/utils/widget/custom_snack_bar.dart';
+import 'package:egy_tour/features/login/presentation/views/login_view.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
@@ -25,6 +27,7 @@ class _SignUpViewState extends State<SignUpView> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
+        automaticallyImplyLeading: false,
         title: arrowBackIcon(),
         actions: [
           changeLanguage(),
@@ -377,7 +380,7 @@ class _SignUpViewState extends State<SignUpView> {
           }
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.blueDark,
+          backgroundColor: AppColors.blueLight,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
@@ -399,7 +402,18 @@ class _SignUpViewState extends State<SignUpView> {
           style: TextStyle(color: Colors.black, fontSize: 15),
         ),
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            // animation using PageTransition Package
+            Navigator.push(
+              context,
+              PageTransition(
+                type: PageTransitionType.rightToLeft,
+                alignment: Alignment.topCenter,
+                duration: Duration(milliseconds: 500),
+                child: LoginView(),
+              ),
+            );
+          },
           child: Text(
             'signup.login'.tr(),
             style: TextStyle(
