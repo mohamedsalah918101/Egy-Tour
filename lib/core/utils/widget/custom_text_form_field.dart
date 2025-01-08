@@ -23,7 +23,9 @@ class CustomTextFormField extends StatelessWidget {
       this.fillColor,
       this.label,
       this.isObeseureText = false,
-      this.labelStyle});
+      this.labelStyle,
+      this.focusBorderColor,
+      this.floatingLabelBehavior, this.focusNode, this.textInputAction});
   final Widget? labelWidget;
   final double? borderRadius;
   final String? Function(String? value)? validator;
@@ -43,11 +45,17 @@ class CustomTextFormField extends StatelessWidget {
   final String? label;
   final TextStyle? labelStyle;
   final bool isObeseureText;
+  final TextInputAction?textInputAction;
+  final FloatingLabelBehavior? floatingLabelBehavior;
+  final Color?focusBorderColor;
+  final FocusNode?focusNode;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       obscureText: isObeseureText,
       validator: validator,
+      focusNode: focusNode,
+      textInputAction: textInputAction,
       controller: controller,
       maxLines: maxLine,
       keyboardType: textInputType,
@@ -61,11 +69,12 @@ class CustomTextFormField extends StatelessWidget {
         suffixIcon: suffixWidget,
         suffixText: suffixText,
         suffixStyle: suffixTextStyle,
-        fillColor: fillColor??AppColors.white,
+        fillColor: fillColor ?? AppColors.white,
         filled: enableFill,
         prefixIcon: prefixWidget,
         label: labelWidget,
-        floatingLabelBehavior: FloatingLabelBehavior.always,
+        floatingLabelBehavior:
+            floatingLabelBehavior ?? FloatingLabelBehavior.always,
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(borderRadius ?? 10),
             borderSide: BorderSide(
@@ -81,8 +90,8 @@ class CustomTextFormField extends StatelessWidget {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius ?? 10),
           borderSide: enableFocusBorder
-              ? const BorderSide(
-                  color: AppColors.black37,
+              ?  BorderSide(
+                  color: focusBorderColor?? AppColors.black37,
                   width: 2,
                 )
               : BorderSide.none,

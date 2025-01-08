@@ -1,5 +1,6 @@
 import 'package:egy_tour/core/utils/constants/constant_variables.dart';
-import 'package:egy_tour/features/basic/presentation/views/basic_view.dart';
+import 'package:egy_tour/core/utils/theme/app_colors.dart';
+import 'package:egy_tour/features/login/presentation/views/login_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,11 +17,12 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        scaffoldBackgroundColor: AppColors.white,
         fontFamily: fontFamily,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const BasicView(),
+      home: const LoginView(),
     );
   }
 }
