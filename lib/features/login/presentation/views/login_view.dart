@@ -282,6 +282,7 @@ class _LoginViewState extends State<LoginView> {
                   type: PageTransitionType.fade,
                   alignment: Alignment.topCenter,
                   duration: Duration(milliseconds: 500),
+                  // Navigate it to The Home Screen
                   child: TestScreen(),
                 ),
               );
