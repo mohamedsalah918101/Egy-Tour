@@ -25,7 +25,10 @@ class CustomTextFormField extends StatelessWidget {
       this.isObeseureText = false,
       this.labelStyle,
       this.focusBorderColor,
-      this.floatingLabelBehavior, this.focusNode, this.textInputAction});
+      this.floatingLabelBehavior,
+      this.focusNode,
+      this.textInputAction,
+      this.onFieldSubmitted});
   final Widget? labelWidget;
   final double? borderRadius;
   final String? Function(String? value)? validator;
@@ -45,10 +48,11 @@ class CustomTextFormField extends StatelessWidget {
   final String? label;
   final TextStyle? labelStyle;
   final bool isObeseureText;
-  final TextInputAction?textInputAction;
+  final TextInputAction? textInputAction;
   final FloatingLabelBehavior? floatingLabelBehavior;
-  final Color?focusBorderColor;
-  final FocusNode?focusNode;
+  final Color? focusBorderColor;
+  final FocusNode? focusNode;
+  final void Function(String?)? onFieldSubmitted;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -61,6 +65,7 @@ class CustomTextFormField extends StatelessWidget {
       keyboardType: textInputType,
       cursorColor: Colors.black,
       style: textStyle,
+      onFieldSubmitted: onFieldSubmitted,
       decoration: InputDecoration(
         labelText: label,
         labelStyle: labelStyle,
@@ -90,8 +95,8 @@ class CustomTextFormField extends StatelessWidget {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius ?? 10),
           borderSide: enableFocusBorder
-              ?  BorderSide(
-                  color: focusBorderColor?? AppColors.black37,
+              ? BorderSide(
+                  color: focusBorderColor ?? AppColors.black37,
                   width: 2,
                 )
               : BorderSide.none,

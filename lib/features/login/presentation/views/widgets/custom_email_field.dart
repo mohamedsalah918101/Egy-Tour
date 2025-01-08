@@ -5,8 +5,11 @@ import 'package:egy_tour/core/utils/widget/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 class CustomEmailWithShadow extends StatelessWidget {
-  const CustomEmailWithShadow({super.key, this.focusNode});
+  const CustomEmailWithShadow(
+      {super.key, this.focusNode, required this.emailController, this.formKey});
   final FocusNode? focusNode;
+  final TextEditingController emailController;
+  final GlobalKey<FormState>? formKey;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,6 +17,13 @@ class CustomEmailWithShadow extends StatelessWidget {
         customBoxShadow(),
       ]),
       child: CustomTextFormField(
+        validator: (value) {
+          if (value != null && value.trim().isEmpty) {
+            return 'Email Can\'t be empty ';
+          }
+          return null;
+        },
+        controller: emailController,
         focusNode: focusNode,
         textInputAction: TextInputAction.next,
         maxLine: 1,
