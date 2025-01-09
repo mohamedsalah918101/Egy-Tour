@@ -115,6 +115,7 @@ class _LoginViewState extends State<LoginView> {
                             children: [
                               // Username Field
                               usernameField(),
+
                               // Password Field
                               passwordField(),
 
@@ -122,14 +123,14 @@ class _LoginViewState extends State<LoginView> {
                                 height: 25,
                               ),
 
-                              // Sign Up Button
+                              // Login Button
                               loginButton(),
 
                               SizedBox(
                                 height: 20,
                               ),
 
-                              // Already Have Account
+                              // Don't have Account
                               doNotHaveAccount()
                             ],
                           ),
