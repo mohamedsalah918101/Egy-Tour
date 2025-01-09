@@ -1,6 +1,7 @@
 import 'package:egy_tour/core/utils/extensions/media_query.dart';
 import 'package:egy_tour/core/utils/extensions/navigation.dart';
 import 'package:egy_tour/core/utils/theme/app_colors.dart';
+import 'package:egy_tour/core/utils/theme/font_styles.dart';
 import 'package:egy_tour/features/governments/presentation/views/widgets/landmark_card.dart';
 import 'package:flutter/material.dart';
 
@@ -51,26 +52,52 @@ class _LandmarkViewState extends State<LandmarkView> {
   };
 
   @override
-  Widget build(BuildContext context) {    
+  Widget build(BuildContext context) {   
+    String? selectedItem = widget.government;
+    final List<String> items = landmarks.keys.toList().cast();
+
     return Scaffold(
       appBar: AppBar(
-        leadingWidth: context.screenWidth*0.25,
-        leading: IconButton(
-          onPressed: () {
-            context.pop();
-          }, 
-          icon: Icon(
-            Icons.arrow_back,
-            color: AppColors.white,
-            size: 32
-          ),
-          style:  ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(AppColors.blueDark),
-          )
+        leadingWidth: context.screenWidth*0.2,
+        leading: Row(
+          children: [
+            SizedBox(width: context.screenWidth*0.06),
+            IconButton(
+              onPressed: () {
+                context.pop();
+              }, 
+              icon: Icon(
+                Icons.arrow_back,
+                color: AppColors.white,
+                size: 32
+              ),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(AppColors.blueDark),
+              )
+            ),
+          ]
         ),
 
-        titleSpacing: context.screenWidth*0.3,
-        
+        title: DropdownButton<String>(
+            value: selectedItem,
+            items: items.map((String item) {
+              return DropdownMenuItem<String>(
+                value: item,
+                child: Text(item),
+              );
+            }).toList(),
+            icon: Icon(
+              Icons.keyboard_arrow_down_rounded
+            ),
+            iconSize: 32,
+            style: AppTextStyles.bold24.copyWith(color: AppColors.black37),
+            underline: Container(),
+            onChanged: (String? newValue) {
+              setState(() {
+                selectedItem = newValue;
+              });
+            },
+          ),
       ),
       body: Container(
         color: AppColors.white,
