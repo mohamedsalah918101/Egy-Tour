@@ -1,4 +1,5 @@
 import 'package:egy_tour/core/utils/theme/font_styles.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class HavingAccountLogin extends StatelessWidget {
@@ -8,19 +9,17 @@ class HavingAccountLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Text.rich(TextSpan(
+      text: "Don’t have an account?",
+      style: AppTextStyles.regular15,
       children: [
-        Text(
-          "Don’t have an account?",
-          style: AppTextStyles.regular15,
-        ),
-        Text(
-          "Create",
+        TextSpan(
+          text: "Create",
           style: AppTextStyles.regular15
               .copyWith(decoration: TextDecoration.underline),
+          recognizer: TapGestureRecognizer()..onTap = () {},
         ),
       ],
-    );
+    ));
   }
 }
