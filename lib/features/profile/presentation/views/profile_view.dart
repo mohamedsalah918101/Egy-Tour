@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:egy_tour/core/utils/extensions/media_query.dart';
 import 'package:egy_tour/core/utils/theme/app_colors.dart';
 import 'package:egy_tour/core/utils/widget/custom_text_form_field.dart';
+import 'package:egy_tour/features/profile/presentation/views/widgets/custom_clip_path.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -48,7 +49,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Positioned(
                   top: context.screenHeight * 0.16,
                   left: context.screenWidth * 0.5 - 60,
-                  // right: context.screenWidth * 0.5,
                   child: Stack(
                     children: [
                       CircleAvatar(
@@ -76,7 +76,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Form(
             key: _state,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
               child: Column(
                 children: [
                   CustomTextFormField(
@@ -86,7 +88,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     textStyle: TextStyle(color: AppColors.black37),
                     borderColor: AppColors.white,
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(
+                    height: 10,
+                  ),
                   CustomTextFormField(
                     prefixWidget: Icon(
                       Icons.email,
@@ -97,7 +101,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     enabled: false,
                     textStyle: TextStyle(color: AppColors.black37),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(
+                    height: 10,
+                  ),
                   CustomTextFormField(
                     prefixWidget: Icon(
                       Icons.phone,
@@ -108,7 +114,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     enabled: false,
                     textStyle: TextStyle(color: AppColors.black37),
                     suffixWidget: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(
+                        8.0,
+                      ),
                       child: SizedBox(
                         width: 80,
                         height: 30, // Set a fixed width for the dropdown
@@ -139,10 +147,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   SizedBox(height: 10),
                   CustomTextFormField(
-                    prefixWidget: Icon(
-                      Icons.lock,
-                      color: AppColors.black37,
-                    ),
+                    prefixWidget: Icon(Icons.lock, color: AppColors.black37),
                     controller: _passwordController,
                     borderColor: AppColors.white,
                     enabled: false,
@@ -170,18 +175,3 @@ class _ProfileScreenState extends State<ProfileScreen> {
 }
 
 // Custom Clipper for the background
-class CustomClipPath extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    Path path = Path();
-    path.lineTo(0, size.height - (size.height * 0.19));
-    path.quadraticBezierTo(size.width / 2, size.height, size.width,
-        size.height - (size.height * 0.19));
-    path.lineTo(size.width, 0);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
-}
