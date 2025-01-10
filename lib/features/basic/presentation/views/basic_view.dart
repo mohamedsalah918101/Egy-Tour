@@ -4,6 +4,8 @@ import 'package:egy_tour/core/utils/theme/font_styles.dart';
 import 'package:egy_tour/features/basic/presentation/views/widgets/custom_bottom_navigation_bar.dart';
 import 'package:egy_tour/features/home/presentation/views/home_view.dart';
 import 'package:flutter/material.dart';
+
+import '../../../favourites/presentation/views/favourites_view.dart';
 class BasicView extends StatefulWidget {
   const BasicView({super.key});
 
@@ -44,7 +46,7 @@ class _BasicViewState extends State<BasicView> {
           [
             HomeView(),
             Text("Governments Screen"),
-            Text("Favorites Screen"),
+            FavouritesView(),
             Text("Profile Screen"),
           ][selectedIndex],
           Align(
