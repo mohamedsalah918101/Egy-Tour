@@ -3,12 +3,14 @@ import 'package:egy_tour/core/utils/theme/app_colors.dart';
 import 'package:egy_tour/core/utils/theme/font_styles.dart';
 import 'package:flutter/material.dart';
 
-class PushLoginButton extends StatelessWidget {
-  const PushLoginButton({
+class CustomPushButton extends StatelessWidget {
+  const CustomPushButton({
     super.key,
     this.onTap,
+    required this.title,
   });
   final void Function()? onTap;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class PushLoginButton extends StatelessWidget {
           color: AppColors.blueLight,
         ),
         child: Text(
-          "Login",
+          title,
           textAlign: TextAlign.center,
           style: AppTextStyles.bold18.copyWith(color: AppColors.white),
         ),

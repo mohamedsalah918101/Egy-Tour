@@ -1,5 +1,6 @@
 import 'package:egy_tour/core/utils/constants/constant_variables.dart';
 import 'package:egy_tour/core/utils/extensions/media_query.dart';
+import 'package:egy_tour/core/utils/extensions/navigation.dart';
 import 'package:egy_tour/core/utils/theme/app_colors.dart';
 import 'package:egy_tour/core/utils/theme/font_styles.dart';
 import 'package:egy_tour/core/utils/widget/custom_snack_bar.dart';
@@ -8,6 +9,7 @@ import 'package:egy_tour/features/login/presentation/views/widgets/custom_passwo
 import 'package:egy_tour/features/login/presentation/views/widgets/have_account_login.dart';
 import 'package:egy_tour/features/login/presentation/views/widgets/login_push_buttong.dart';
 import 'package:egy_tour/features/login/presentation/views/widgets/title_with_changing_lang.dart';
+import 'package:egy_tour/features/sign_up/presentation/views/sign_up_view.dart';
 import 'package:flutter/material.dart';
 
 class LoginBody extends StatefulWidget {
@@ -24,6 +26,7 @@ final _focusNode2 = FocusNode();
 final TextEditingController emailController = TextEditingController();
 final TextEditingController passwordController = TextEditingController();
 final formKey = GlobalKey<FormState>();
+bool isObeseureText = false;
 
 class _LoginBodyState extends State<LoginBody> {
   @override
@@ -65,7 +68,7 @@ class _LoginBodyState extends State<LoginBody> {
                 const SizedBox(
                   height: 10,
                 ),
-                CustomEmailWithShadow(
+                CustomEmailField(
                   emailController: emailController,
                   focusNode: _focusNode1,
                 ),
@@ -81,9 +84,16 @@ class _LoginBodyState extends State<LoginBody> {
                   },
                   passwordController: passwordController,
                   focusNode: _focusNode2,
+                  isObeseureText: isObeseureText,
+                  changeObsecureText: () {
+                    setState(() {
+                      isObeseureText = !isObeseureText;
+                    });
+                  },
                 ),
-
-              SizedBox(height: 10,)
+                SizedBox(
+                  height: 10,
+                )
               ],
             ),
           ),
@@ -93,7 +103,7 @@ class _LoginBodyState extends State<LoginBody> {
               spacing: 20,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                PushLoginButton(
+                CustomPushButton(
                   onTap: () {
                     _focusNode1.unfocus();
                     _focusNode2.unfocus();
@@ -101,13 +111,19 @@ class _LoginBodyState extends State<LoginBody> {
                       showCustomSnackBar(context, "SuccessLogin");
                     }
                   },
+                  title: 'Login',
                 ),
-                HavingAccountLogin(),
+                HavingAccountLoginOrSignUp(
+                  mainText: "Don’t have an account?",
+                  actionText: 'Create',
+                  onTapActionText: () {
+                    context.push(SignUpView());
+                  },
+                ),
                 SizedBox()
               ],
             ),
           ),
-         
         ],
       ),
     );
