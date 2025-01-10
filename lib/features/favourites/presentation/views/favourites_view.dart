@@ -14,7 +14,11 @@ class FavouritesView extends StatefulWidget {
 class _FavouritesViewState extends State<FavouritesView> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 150 / 180,
+        ),
         itemCount: favorites.length,
         itemBuilder: (context, index) {
           Place item = favorites[index];
@@ -24,5 +28,5 @@ class _FavouritesViewState extends State<FavouritesView> {
               imageUrl: item.imageUrl,
               isFavorite: item.isFavorite);
         });
-  }//q
+  } //q
 }
