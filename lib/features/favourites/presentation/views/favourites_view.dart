@@ -24,5 +24,5 @@ class _FavouritesViewState extends State<FavouritesView> {
               imageUrl: item.imageUrl,
               isFavorite: item.isFavorite);
         });
-  }
+  }//q
 }
