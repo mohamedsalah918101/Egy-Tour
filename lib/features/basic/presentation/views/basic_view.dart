@@ -2,7 +2,7 @@ import 'package:egy_tour/core/utils/extensions/media_query.dart';
 import 'package:egy_tour/core/utils/theme/app_colors.dart';
 import 'package:egy_tour/core/utils/theme/font_styles.dart';
 import 'package:egy_tour/features/basic/presentation/views/widgets/custom_bottom_navigation_bar.dart';
-import 'package:egy_tour/features/home/presentation/views/home_view.dart';
+import 'package:egy_tour/features/profile/presentation/views/profile_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../../favourites/presentation/views/favourites_view.dart';
@@ -44,7 +44,7 @@ class _BasicViewState extends State<BasicView> {
       body: Stack(
         children: [
           [
-            HomeView(),
+            ProfileScreen(),
             Text("Governments Screen"),
             FavouritesView(),
             Text("Profile Screen"),
