@@ -1,7 +1,7 @@
 import 'package:egy_tour/core/utils/constants/constant_variables.dart';
 import 'package:egy_tour/core/utils/extensions/media_query.dart';
 import 'package:egy_tour/core/utils/theme/font_styles.dart';
-import 'package:egy_tour/features/home/presentation/views/widgets/places_card.dart';
+import 'package:egy_tour/core/utils/widget/custom_places_card.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
