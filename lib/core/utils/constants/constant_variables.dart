@@ -54,5 +54,35 @@ List<Place> places = [
 ];
 
 List <Place> favorites=[
+  Place(
+      name: 'Egyptian Museum',
+      location: "Cairo, Egypt",
+      imageUrl: placeHolderImage,
+      isFavorite: true),
+  Place(
+      name: 'Egyptian Museum',
+      location: "Cairo, Egypt",
+      imageUrl: placeHolderImage,
+      isFavorite: true),
+  Place(
+      name: 'Egyptian Museum',
+      location: "Cairo, Egypt",
+      imageUrl: placeHolderImage,
+      isFavorite: true),
+  Place(
+      name: 'Egyptian Museum',
+      location: "Cairo, Egypt",
+      imageUrl: placeHolderImage,
+      isFavorite: true),
+  Place(
+      name: 'Egyptian Museum',
+      location: "Cairo, Egypt",
+      imageUrl: placeHolderImage,
+      isFavorite: true),
+  Place(
+      name: 'Egyptian Museum',
+      location: "Cairo, Egypt",
+      imageUrl: placeHolderImage,
+      isFavorite: true),
 
 ];
