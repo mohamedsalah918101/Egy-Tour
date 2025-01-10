@@ -53,7 +53,7 @@ class SignUpForm extends StatelessWidget {
           ),
 
           // Password Field
-          CustomPasswordWithShadow(
+          CustomPasswordField(
               isObeseureText: hiddenPassword,
               changeObsecureText: onChangeObsecure,
               passwordController: passwordController),

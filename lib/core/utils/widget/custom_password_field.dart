@@ -2,8 +2,8 @@ import 'package:egy_tour/core/utils/theme/app_colors.dart';
 import 'package:egy_tour/core/utils/widget/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
-class CustomPasswordWithShadow extends StatelessWidget {
-  const CustomPasswordWithShadow({
+class CustomPasswordField extends StatelessWidget {
+  const CustomPasswordField({
     super.key,
     this.focusNode,
     this.onFieldSubmitted,

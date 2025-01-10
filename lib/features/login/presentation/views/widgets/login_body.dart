@@ -75,7 +75,7 @@ class _LoginBodyState extends State<LoginBody> {
                 SizedBox(
                   height: 5,
                 ),
-                CustomPasswordWithShadow(
+                CustomPasswordField(
                   onFieldSubmitted: (value) {
                     _focusNode2.unfocus();
                     if (formKey.currentState!.validate()) {
