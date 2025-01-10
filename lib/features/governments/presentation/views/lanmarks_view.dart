@@ -72,7 +72,7 @@ class _LandmarkViewState extends State<LandmarkView> {
                 size: 32
               ),
               style: ButtonStyle(
-                backgroundColor:WidgetStateProperty.all(AppColors.blueDark),
+                backgroundColor: MaterialStateProperty.all(AppColors.blueDark),
               )
             ),
           ]
