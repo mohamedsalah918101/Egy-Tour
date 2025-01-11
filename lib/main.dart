@@ -1,9 +1,10 @@
 import 'package:egy_tour/core/utils/constants/constant_variables.dart';
 import 'package:egy_tour/core/utils/theme/app_colors.dart';
-import 'package:egy_tour/features/login/presentation/views/login_view.dart';
 import 'package:egy_tour/features/sign_up/data/models/user_model.dart';
+import 'package:egy_tour/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
 void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(UserAdapter());
@@ -15,13 +16,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: AppColors.white,
-        fontFamily: fontFamily,
-        useMaterial3: true,
-      ),
-      home: const LoginView(),
-    );
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          scaffoldBackgroundColor: AppColors.white,
+          fontFamily: fontFamily,
+          useMaterial3: true,
+        ),
+        home: CheckingLoginedUser());
   }
 }

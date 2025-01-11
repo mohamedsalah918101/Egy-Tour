@@ -115,20 +115,21 @@ class _LoginBodyState extends State<LoginBody> {
                               email: emailController.text,
                               password: passwordController.text))
                           .then((value) {
-                        value.fold((check) {
-                          if (check) {
-                            context.pushReplacement(BasicView());
+                        value.fold((model) {
+                          if (model != null) {
+                            context.pushReplacement(BasicView(
+                              userModel: model,
+                            ));
                           } else {
-                             showCustomSnackBar(context, "Email or Password is not correct",
-                              backgroundColor: AppColors.red);
+                            showCustomSnackBar(
+                                context, "Email or Password is not correct",
+                                backgroundColor: AppColors.red);
                           }
                         }, (error) {
                           showCustomSnackBar(context, error,
                               backgroundColor: AppColors.red);
                         });
                       });
-
-                      // showCustomSnackBar(context, "SuccessLogin");
                     }
                   },
                   title: 'Login',
