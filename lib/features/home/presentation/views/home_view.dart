@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:egy_tour/core/utils/constants/constant_variables.dart';
 import 'package:egy_tour/core/utils/theme/app_colors.dart';
 import 'package:egy_tour/core/utils/theme/font_styles.dart';
@@ -29,13 +30,13 @@ class _HomeViewState extends State<HomeView> {
               tabs: [
                 Tab(
                   child: Text(
-                    "Suggested Places",
+                    "home.suggestedPlaces".tr(),
                     style: AppTextStyles.regular16,
                   ),
                 ),
                 Tab(
                   child: Text(
-                    "Popular Places",
+                    "home.popularPlaces".tr(),
                     style: AppTextStyles.regular16,
                   ),
                 )

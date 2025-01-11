@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:egy_tour/core/utils/widget/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class UserNameField extends StatelessWidget {
     return CustomTextFormField(
       enabled: enabled,
       controller: nameController,
-      label: "User Name",
+      label: "signup.username".tr(),
       prefixWidget: Icon(
         Icons.person,
         color: Colors.grey,

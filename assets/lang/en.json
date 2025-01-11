@@ -14,10 +14,15 @@
     "app_name": "Egy-Tour",
     "welcome_title": "Welcome To Egypt",
     "welcome_subtitle": "With us, you will find your best experience exploring the wonders of Egypt.",
-    "username": "Username",
+    "email": "Email",
     "password": "Password",
     "login_button": "Login",
     "no_account": "Don't have an account?",
     "create": "Create"
+  },
+  "home": {
+    "app_name": "Egy-Tour",
+    "suggestedPlaces": "Suggested Places",
+    "popularPlaces": "Popular Places"
   }
 }

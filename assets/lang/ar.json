@@ -11,13 +11,18 @@
     "login": "تسجيل الدخول"
   },
   "login": {
-    "app_name": "إيجي-تور",
+    "app_name": "جولة مصرية",
     "welcome_title": "مرحباً بك في مصر",
     "welcome_subtitle": "معنا ستجد أفضل تجربة لاستكشاف عجائب مصر",
-    "username": "اسم المستخدم",
+    "email": "البريد الإلكتروني",
     "password": "كلمة المرور",
     "login_button": "تسجيل الدخول",
     "no_account": "ليس لديك حساب؟",
     "create": "إنشاء"
+  },
+  "home": {
+    "app_name": "جولة مصرية",
+    "suggestedPlaces":"اماكن مقترحة",
+    "popularPlaces":"اماكن مشهورة"
   }
 }

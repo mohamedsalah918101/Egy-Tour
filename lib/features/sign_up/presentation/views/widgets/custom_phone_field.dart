@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:egy_tour/core/utils/widget/custom_text_form_field.dart';
 import 'package:egy_tour/features/sign_up/presentation/views/widgets/prefix_in_phone_field.dart';
 import 'package:egy_tour/features/sign_up/presentation/views/widgets/suffix_in_phone_field.dart';
@@ -17,7 +18,7 @@ class CustomPhoneFormField extends StatelessWidget {
       controller: phoneController,
       maxLine: 1,
       textInputType: TextInputType.phone,
-      label: "Phone Number",
+      label: "signup.phone".tr(),
     );
   }
 }

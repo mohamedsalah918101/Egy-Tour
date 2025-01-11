@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:egy_tour/core/utils/theme/app_colors.dart';
 import 'package:egy_tour/core/utils/theme/font_styles.dart';
 import 'package:egy_tour/core/utils/widget/custom_arrow_back.dart';
@@ -41,12 +42,12 @@ class _SignUpViewState extends State<SignUpView> {
                   ],
                 ),
                 // Title
-                Text('Create Account', //.tr(),
+                Text('signup.title'.tr(), 
                     style: AppTextStyles.bold24),
 
                 // Subtitle
                 Text(
-                  r"With us, you'll discover Egypt like never before", // .tr(),
+                  r"signup.subtitle".tr(), 
                   style:
                       AppTextStyles.regular14.copyWith(color: AppColors.grey21),
                 ),

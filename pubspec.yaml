@@ -32,6 +32,7 @@ dependencies:
   country_code_picker: ^3.1.0
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1
+  easy_localization: ^3.0.7
   flutter:
     sdk: flutter
   hive: ^2.2.3

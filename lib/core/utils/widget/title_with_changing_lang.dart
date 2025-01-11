@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:egy_tour/core/utils/theme/app_colors.dart';
 import 'package:egy_tour/core/utils/theme/font_styles.dart';
 import 'package:egy_tour/core/utils/widget/custom_language_changer.dart';
@@ -14,7 +15,7 @@ class TitleWithLangaugeChanging extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          "Egy-Tour",
+          "login.app_name".tr(),
           style: AppTextStyles.bold36.copyWith(color: AppColors.white),
         ),
         ChangingLanguage()

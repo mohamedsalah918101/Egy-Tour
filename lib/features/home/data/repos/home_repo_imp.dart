@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:egy_tour/core/utils/constants/constant_variables.dart';
 import 'package:egy_tour/core/utils/functions/hive_services.dart';
+import 'package:egy_tour/core/utils/functions/shared_pref_helper.dart';
 import 'package:egy_tour/features/home/data/repos/home_repo.dart';
 import 'package:egy_tour/features/sign_up/data/models/user_model.dart';
 
@@ -18,5 +19,10 @@ class HomeRepoImp implements HomeRepo {
     } catch (e) {
       return right(e.toString());
     }
+  }
+
+  @override
+  Future<void> logOut() async{
+    await SharedPrefHelper.setString('');
   }
 }
