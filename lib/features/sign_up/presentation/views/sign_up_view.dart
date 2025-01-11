@@ -2,6 +2,7 @@ import 'package:egy_tour/core/utils/theme/app_colors.dart';
 import 'package:egy_tour/core/utils/theme/font_styles.dart';
 import 'package:egy_tour/core/utils/widget/custom_arrow_back.dart';
 import 'package:egy_tour/core/utils/widget/custom_language_changer.dart';
+import 'package:egy_tour/features/sign_up/data/repos/sign_up_repo_imp.dart';
 import 'package:egy_tour/features/sign_up/presentation/views/widgets/sign_up_form.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,7 @@ class SignUpView extends StatefulWidget {
 
 class _SignUpViewState extends State<SignUpView> {
   final _formKey = GlobalKey<FormState>();
+  final SignUpRepoImp signUpRepoImp = SignUpRepoImp();
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -41,27 +43,29 @@ class _SignUpViewState extends State<SignUpView> {
                 // Title
                 Text('Create Account', //.tr(),
                     style: AppTextStyles.bold24),
-            
+
                 // Subtitle
                 Text(
                   r"With us, you'll discover Egypt like never before", // .tr(),
-                  style: AppTextStyles.regular14
-                      .copyWith(color: AppColors.grey21),
+                  style:
+                      AppTextStyles.regular14.copyWith(color: AppColors.grey21),
                 ),
-            
+
                 // Form
                 SignUpForm(
-                    onChangeObsecure: () {
-                      setState(() {
-                        hiddenPassword = !hiddenPassword;
-                      });
-                    },
-                    formKey: _formKey,
-                    nameController: nameController,
-                    emailController: emailController,
-                    phoneController: phoneController,
-                    hiddenPassword: hiddenPassword,
-                    passwordController: passwordController),
+                  onChangeObsecure: () {
+                    setState(() {
+                      hiddenPassword = !hiddenPassword;
+                    });
+                  },
+                  formKey: _formKey,
+                  nameController: nameController,
+                  emailController: emailController,
+                  phoneController: phoneController,
+                  hiddenPassword: hiddenPassword,
+                  passwordController: passwordController,
+                  signUpRepoImp: signUpRepoImp,
+                ),
               ],
             ),
           ),

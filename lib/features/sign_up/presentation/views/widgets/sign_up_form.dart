@@ -1,9 +1,12 @@
 import 'package:egy_tour/core/utils/extensions/navigation.dart';
+import 'package:egy_tour/core/utils/theme/app_colors.dart';
 import 'package:egy_tour/core/utils/widget/custom_snack_bar.dart';
 import 'package:egy_tour/core/utils/widget/custom_email_field.dart';
 import 'package:egy_tour/core/utils/widget/custom_password_field.dart';
 import 'package:egy_tour/features/login/presentation/views/widgets/have_account_login.dart';
 import 'package:egy_tour/features/login/presentation/views/widgets/login_push_buttong.dart';
+import 'package:egy_tour/features/sign_up/data/models/user_model.dart';
+import 'package:egy_tour/features/sign_up/data/repos/sign_up_repo_imp.dart';
 import 'package:egy_tour/features/sign_up/presentation/views/widgets/custom_phone_field.dart';
 import 'package:egy_tour/features/sign_up/presentation/views/widgets/user_name_field.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +21,7 @@ class SignUpForm extends StatelessWidget {
     required this.hiddenPassword,
     required this.passwordController,
     required this.onChangeObsecure,
+    required this.signUpRepoImp,
   });
 
   final GlobalKey<FormState> formKey;
@@ -27,7 +31,7 @@ class SignUpForm extends StatelessWidget {
   final bool hiddenPassword;
   final TextEditingController passwordController;
   final void Function() onChangeObsecure;
-
+  final SignUpRepoImp signUpRepoImp;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -63,9 +67,24 @@ class SignUpForm extends StatelessWidget {
           ),
           // Sign Up Button
           CustomPushButton(
-            onTap: () {
+            onTap: () async {
               if (formKey.currentState!.validate()) {
-                showCustomSnackBar(context, "Success Register");
+                await signUpRepoImp
+                    .signUp(User(
+                        userName: nameController.text,
+                        email: emailController.text,
+                        phoneNumber: phoneController.text,
+                        password: passwordController.text))
+                    .then((value) {
+                  value.fold((user) {
+                    showCustomSnackBar(
+                        context, "Accounted Created Successfully");
+                    context.pop();
+                  }, (error) {
+                    showCustomSnackBar(context, error,
+                        backgroundColor: AppColors.red);
+                  });
+                });
               }
             },
             title: "Sign Up",

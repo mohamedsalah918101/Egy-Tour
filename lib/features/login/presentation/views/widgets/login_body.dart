@@ -5,10 +5,13 @@ import 'package:egy_tour/core/utils/theme/app_colors.dart';
 import 'package:egy_tour/core/utils/theme/font_styles.dart';
 import 'package:egy_tour/core/utils/widget/custom_email_field.dart';
 import 'package:egy_tour/core/utils/widget/custom_password_field.dart';
+import 'package:egy_tour/core/utils/widget/custom_snack_bar.dart';
 import 'package:egy_tour/features/basic/presentation/views/basic_view.dart';
+import 'package:egy_tour/features/login/data/repos/login_repo_imp.dart';
 import 'package:egy_tour/features/login/presentation/views/widgets/have_account_login.dart';
 import 'package:egy_tour/features/login/presentation/views/widgets/login_push_buttong.dart';
 import 'package:egy_tour/core/utils/widget/title_with_changing_lang.dart';
+import 'package:egy_tour/features/sign_up/data/models/user_model.dart';
 import 'package:egy_tour/features/sign_up/presentation/views/sign_up_view.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +24,7 @@ class LoginBody extends StatefulWidget {
   State<LoginBody> createState() => _LoginBodyState();
 }
 
+final LoginRepoImp loginRepoImp = LoginRepoImp();
 final _focusNode1 = FocusNode();
 final _focusNode2 = FocusNode();
 final TextEditingController emailController = TextEditingController();
@@ -78,10 +82,6 @@ class _LoginBodyState extends State<LoginBody> {
                 CustomPasswordField(
                   onFieldSubmitted: (value) {
                     _focusNode2.unfocus();
-                    if (formKey.currentState!.validate()) {
-                      context.push(BasicView());
-                      // showCustomSnackBar(context, "SuccessLogin");
-                    }
                   },
                   passwordController: passwordController,
                   focusNode: _focusNode2,
@@ -105,12 +105,30 @@ class _LoginBodyState extends State<LoginBody> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 CustomPushButton(
-                  onTap: () {
+                  onTap: () async {
                     _focusNode1.unfocus();
                     _focusNode2.unfocus();
                     if (formKey.currentState!.validate()) {
-                      context.push(BasicView());
-                     // showCustomSnackBar(context, "SuccessLogin");
+                      await loginRepoImp
+                          .checkLogin(User(
+                              userName: "",
+                              email: emailController.text,
+                              password: passwordController.text))
+                          .then((value) {
+                        value.fold((check) {
+                          if (check) {
+                            context.pushReplacement(BasicView());
+                          } else {
+                             showCustomSnackBar(context, "Email or Password is not correct",
+                              backgroundColor: AppColors.red);
+                          }
+                        }, (error) {
+                          showCustomSnackBar(context, error,
+                              backgroundColor: AppColors.red);
+                        });
+                      });
+
+                      // showCustomSnackBar(context, "SuccessLogin");
                     }
                   },
                   title: 'Login',
