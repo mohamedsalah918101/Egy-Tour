@@ -118,7 +118,7 @@ class _LoginBodyState extends State<LoginBody> {
                         value.fold((model) {
                           if (model != null) {
                             context.pushReplacement(BasicView(
-                              userModel: model,
+                              email: emailController.text,
                             ));
                           } else {
                             showCustomSnackBar(

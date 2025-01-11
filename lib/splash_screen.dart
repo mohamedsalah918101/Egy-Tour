@@ -23,8 +23,10 @@ class CheckingLoginedUser extends StatelessWidget {
           );
         }
 
-        if (snapshot.hasData && snapshot.data != '') {
-          return const BasicView();
+        if (snapshot.hasData && snapshot.data != null && snapshot.data != '') {
+          return BasicView(
+            email: snapshot.data!,
+          );
         } else {
           return const LoginView();
         }
