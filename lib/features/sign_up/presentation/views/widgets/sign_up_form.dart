@@ -1,7 +1,7 @@
 import 'package:egy_tour/core/utils/extensions/navigation.dart';
 import 'package:egy_tour/core/utils/widget/custom_snack_bar.dart';
-import 'package:egy_tour/features/login/presentation/views/widgets/custom_email_field.dart';
-import 'package:egy_tour/features/login/presentation/views/widgets/custom_password_field.dart';
+import 'package:egy_tour/core/utils/widget/custom_email_field.dart';
+import 'package:egy_tour/core/utils/widget/custom_password_field.dart';
 import 'package:egy_tour/features/login/presentation/views/widgets/have_account_login.dart';
 import 'package:egy_tour/features/login/presentation/views/widgets/login_push_buttong.dart';
 import 'package:egy_tour/features/sign_up/presentation/views/widgets/custom_phone_field.dart';

@@ -3,12 +3,12 @@ import 'package:egy_tour/core/utils/extensions/media_query.dart';
 import 'package:egy_tour/core/utils/extensions/navigation.dart';
 import 'package:egy_tour/core/utils/theme/app_colors.dart';
 import 'package:egy_tour/core/utils/theme/font_styles.dart';
-import 'package:egy_tour/core/utils/widget/custom_snack_bar.dart';
-import 'package:egy_tour/features/login/presentation/views/widgets/custom_email_field.dart';
-import 'package:egy_tour/features/login/presentation/views/widgets/custom_password_field.dart';
+import 'package:egy_tour/core/utils/widget/custom_email_field.dart';
+import 'package:egy_tour/core/utils/widget/custom_password_field.dart';
+import 'package:egy_tour/features/basic/presentation/views/basic_view.dart';
 import 'package:egy_tour/features/login/presentation/views/widgets/have_account_login.dart';
 import 'package:egy_tour/features/login/presentation/views/widgets/login_push_buttong.dart';
-import 'package:egy_tour/features/login/presentation/views/widgets/title_with_changing_lang.dart';
+import 'package:egy_tour/core/utils/widget/title_with_changing_lang.dart';
 import 'package:egy_tour/features/sign_up/presentation/views/sign_up_view.dart';
 import 'package:flutter/material.dart';
 
@@ -79,7 +79,8 @@ class _LoginBodyState extends State<LoginBody> {
                   onFieldSubmitted: (value) {
                     _focusNode2.unfocus();
                     if (formKey.currentState!.validate()) {
-                      showCustomSnackBar(context, "SuccessLogin");
+                      context.push(BasicView());
+                      // showCustomSnackBar(context, "SuccessLogin");
                     }
                   },
                   passwordController: passwordController,
@@ -108,7 +109,8 @@ class _LoginBodyState extends State<LoginBody> {
                     _focusNode1.unfocus();
                     _focusNode2.unfocus();
                     if (formKey.currentState!.validate()) {
-                      showCustomSnackBar(context, "SuccessLogin");
+                      context.push(BasicView());
+                     // showCustomSnackBar(context, "SuccessLogin");
                     }
                   },
                   title: 'Login',

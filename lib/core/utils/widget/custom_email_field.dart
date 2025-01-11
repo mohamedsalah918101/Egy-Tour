@@ -5,10 +5,15 @@ import 'package:flutter/material.dart';
 
 class CustomEmailField extends StatelessWidget {
   const CustomEmailField(
-      {super.key, this.focusNode, required this.emailController, this.formKey});
+      {super.key,
+      this.focusNode,
+      required this.emailController,
+      this.formKey,
+      this.enabled = true});
   final FocusNode? focusNode;
   final TextEditingController emailController;
   final GlobalKey<FormState>? formKey;
+  final bool enabled;
   @override
   Widget build(BuildContext context) {
     return CustomTextFormField(
@@ -23,10 +28,10 @@ class CustomEmailField extends StatelessWidget {
       textInputAction: TextInputAction.next,
       maxLine: 1,
       label: "Email",
+      enabled: enabled,
       labelStyle: AppTextStyles.regular15.copyWith(color: AppColors.lightGrey8),
       borderRadius: 12,
       borderColor: AppColors.white,
-      enableFill: true,
       fillColor: AppColors.white,
       prefixWidget: Icon(
         Icons.email_rounded,

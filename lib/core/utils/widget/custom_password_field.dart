@@ -9,13 +9,15 @@ class CustomPasswordField extends StatelessWidget {
     this.onFieldSubmitted,
     required this.passwordController,
     required this.isObeseureText,
-    required this.changeObsecureText,
+    this.changeObsecureText,
+    this.enabled = true,
   });
   final FocusNode? focusNode;
   final TextEditingController passwordController;
   final void Function(String?)? onFieldSubmitted;
   final bool isObeseureText;
-  final void Function() changeObsecureText;
+  final void Function()? changeObsecureText;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +32,10 @@ class CustomPasswordField extends StatelessWidget {
         controller: passwordController,
         focusNode: focusNode,
         maxLine: 1,
+        enabled: enabled,
         textInputAction: TextInputAction.done,
         label: "Passowrd",
         borderRadius: 12,
-        enableFill: true,
         isObeseureText: isObeseureText,
         prefixWidget: Icon(
           Icons.lock,

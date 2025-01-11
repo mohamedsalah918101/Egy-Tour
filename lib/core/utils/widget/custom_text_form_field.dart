@@ -1,6 +1,7 @@
 import 'package:egy_tour/core/utils/theme/app_colors.dart';
 import 'package:egy_tour/core/utils/theme/font_styles.dart';
 import 'package:egy_tour/core/utils/widget/custom_box_shadow.dart';
+import 'package:egy_tour/core/utils/widget/custom_outline_borders.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
@@ -29,7 +30,8 @@ class CustomTextFormField extends StatelessWidget {
       this.floatingLabelBehavior,
       this.focusNode,
       this.textInputAction,
-      this.onFieldSubmitted});
+      this.onFieldSubmitted,
+      this.enabled = true});
   final Widget? labelWidget;
   final double? borderRadius;
   final String? Function(String? value)? validator;
@@ -54,6 +56,8 @@ class CustomTextFormField extends StatelessWidget {
   final Color? focusBorderColor;
   final FocusNode? focusNode;
   final void Function(String?)? onFieldSubmitted;
+  final bool enabled; // Add this line to control editability
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -61,6 +65,7 @@ class CustomTextFormField extends StatelessWidget {
         boxShadow: [customBoxShadow()],
       ),
       child: TextFormField(
+        enabled: enabled,
         obscureText: isObeseureText,
         validator: validator,
         focusNode: focusNode,
@@ -86,26 +91,11 @@ class CustomTextFormField extends StatelessWidget {
           label: labelWidget,
           floatingLabelBehavior:
               floatingLabelBehavior ?? FloatingLabelBehavior.never,
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(borderRadius ?? 10),
-              borderSide: BorderSide(
-                color: borderColor ?? AppColors.white,
-                width: borderWidth ?? 2,
-              )),
-          enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(borderRadius ?? 10),
-              borderSide: BorderSide(
-                color: borderColor ?? AppColors.white,
-                width: borderWidth ?? 2,
-              )),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(borderRadius ?? 10),
-            borderSide: enableFocusBorder
-                ? BorderSide(
-                    color: focusBorderColor ?? AppColors.lightGrey8,
-                    width: 2,
-                  )
-                : BorderSide.none,
+          disabledBorder: customOutLineBorders(),
+          border: customOutLineBorders(),
+          enabledBorder: customOutLineBorders(),
+          focusedBorder: customOutLineBorders(
+            borderColor: enableFocusBorder ? AppColors.black37 : null,
           ),
           hoverColor: Colors.white,
         ),

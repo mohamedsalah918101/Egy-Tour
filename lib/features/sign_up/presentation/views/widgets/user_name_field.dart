@@ -5,13 +5,16 @@ class UserNameField extends StatelessWidget {
   const UserNameField({
     super.key,
     required this.nameController,
+    this.enabled=true,
   });
 
   final TextEditingController nameController;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
     return CustomTextFormField(
+      enabled: enabled,
       controller: nameController,
       label: "User Name",
       prefixWidget: Icon(
