@@ -80,11 +80,23 @@ class _BasicViewState extends State<BasicView> {
             ? const Center(child: CircularProgressIndicator())
             : Column(
                 children: [
-                  const [
-                    Expanded(child: HomeView()),
-                    Expanded(child: GovernmentView()),
-                    Expanded(child: FavouritesView()),
-                    Expanded(child: ProfileScreen()),
+                  [
+                    Expanded(
+                      child: HomeView(
+                        user: userModel,
+                      ),
+                    ),
+                    const Expanded(
+                      child: GovernmentView(),
+                    ),
+                    Expanded(
+                      child: FavouritesView(
+                        user: userModel,
+                      ),
+                    ),
+                    const Expanded(
+                      child: ProfileScreen(),
+                    ),
                   ][selectedIndex],
                   Align(
                     alignment: Alignment.bottomCenter,

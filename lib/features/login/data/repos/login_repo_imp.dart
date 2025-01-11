@@ -23,7 +23,9 @@ class LoginRepoImp implements LoginRepo {
       }
       return left(checkingList.isNotEmpty ? usersList.first : null);
     } catch (e) {
-      return right(e.toString());
+      return right(
+        e.toString(),
+      );
     }
   }
 }

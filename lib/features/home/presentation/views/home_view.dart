@@ -1,12 +1,14 @@
-import 'package:egy_tour/core/utils/constants/constant_variables.dart';
 import 'package:egy_tour/core/utils/theme/app_colors.dart';
 import 'package:egy_tour/core/utils/theme/font_styles.dart';
 import 'package:egy_tour/core/utils/widget/custom_places_card.dart';
-import 'package:egy_tour/features/home/data/models/place_model.dart';
+import 'package:egy_tour/features/sign_up/data/models/user_model.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/utils/constants/governments_list.dart';
+
 class HomeView extends StatefulWidget {
-  const HomeView({super.key});
+  final User? user;
+  const HomeView({super.key, required this.user});
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -51,16 +53,11 @@ class _HomeViewState extends State<HomeView> {
                 GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2, childAspectRatio: 150 / 190),
-                  itemCount: 10,
+                  itemCount: suggestedLandmarksList.length,
                   itemBuilder: (context, index) {
                     return PlaceCard(
-                      placeModel: List.generate(
-                          10,
-                          (index) => PlaceModel(
-                              name: "Egyptian Muesem",
-                              location: "Egypt,Cairo",
-                              imageUrl: placeHolderImage,
-                              isFavorite: true))[index],
+                      landmarkModel: suggestedLandmarksList[index],
+                      user: widget.user,
                     );
                   },
                 ),
@@ -69,17 +66,12 @@ class _HomeViewState extends State<HomeView> {
                     SizedBox(
                       height: 250,
                       child: ListView.builder(
-                        itemCount: 10,
+                        itemCount:popLandmarksList.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           return PlaceCard(
-                            placeModel: List.generate(
-                                10,
-                                (index) => PlaceModel(
-                                    name: "Egyptian Muesem",
-                                    location: "Egypt,Cairo",
-                                    imageUrl: placeHolderImage,
-                                    isFavorite: true))[index],
+                            landmarkModel: popLandmarksList[index],
+                            user: widget.user,
                           );
                         },
                       ),
