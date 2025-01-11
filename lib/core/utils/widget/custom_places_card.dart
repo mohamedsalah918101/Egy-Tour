@@ -53,9 +53,9 @@ class _PlaceCardState extends State<PlaceCard> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15.0),
+            FittedBox(
               child: Text(
+                textAlign: TextAlign.center,
                 widget.landmarkModel.title,
                 style: AppTextStyles.regular16,
               ),
