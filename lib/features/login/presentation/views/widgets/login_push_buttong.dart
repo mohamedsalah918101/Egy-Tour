@@ -8,9 +8,11 @@ class CustomPushButton extends StatelessWidget {
     super.key,
     this.onTap,
     required this.title,
+    this.backgroundColor,
   });
   final void Function()? onTap;
   final String title;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +22,9 @@ class CustomPushButton extends StatelessWidget {
         width: context.screenWidth * 0.7,
         margin: EdgeInsets.symmetric(horizontal: 25),
         padding: EdgeInsets.symmetric(vertical: 6, horizontal: 10),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(8)),
-          color: AppColors.blueLight,
+          color: backgroundColor ?? AppColors.blueLight,
         ),
         child: Text(
           title,
