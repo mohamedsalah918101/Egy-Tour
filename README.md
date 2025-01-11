@@ -31,3 +31,18 @@ a mobile application for tourists visiting Egypt to explore landmarks, museums, 
 6. ### Profile
     this screen displays the users info(name, email, phone number, password(obscured))
 
+packages used:
+shared preferences
+Hive
+flutter localization
+dartz
+
+[ui design](https://www.figma.com/design/sBPzQg1RO0wmHxRJJHVtpZ/Egy-Tour?node-id=0-1&p=f&t=bnztC7PVr0QlNAls-0)
+
+team members:
+Mostafa Elzohirey( Coordinator)
+Mahmoud Sobhi awad
+Mohamed Salah
+Ahmed Emad Mahmoud
+Shaza Allam
+Menna Raafat
