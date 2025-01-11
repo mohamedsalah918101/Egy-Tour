@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:egy_tour/core/utils/extensions/navigation.dart';
 import 'package:egy_tour/core/utils/theme/app_colors.dart';
 import 'package:egy_tour/core/utils/widget/custom_snack_bar.dart';
@@ -58,6 +59,14 @@ class SignUpForm extends StatelessWidget {
 
           // Password Field
           CustomPasswordField(
+              validator: (value) {
+                if (value != null && value.trim().isEmpty) {
+                  return 'Password Can\'t be empty ';
+                } else if (value != null && value.length < 6) {
+                  return 'Password must be at least 6 characters';
+                }
+                return null;
+              },
               isObeseureText: hiddenPassword,
               changeObsecureText: onChangeObsecure,
               passwordController: passwordController),
@@ -87,7 +96,7 @@ class SignUpForm extends StatelessWidget {
                 });
               }
             },
-            title: "Sign Up",
+            title: "signup.signup_button".tr(),
           ),
 
           SizedBox(
@@ -96,8 +105,8 @@ class SignUpForm extends StatelessWidget {
 
           // Already Have Account
           HavingAccountLoginOrSignUp(
-            mainText: 'Already Have an Account?',
-            actionText: 'Login',
+            mainText: 'signup.already_have_account'.tr(),
+            actionText: 'signup.login'.tr(),
             onTapActionText: () {
               context.pop();
             },

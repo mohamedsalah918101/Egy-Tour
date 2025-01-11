@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:egy_tour/core/utils/theme/app_colors.dart';
 import 'package:egy_tour/core/utils/theme/font_styles.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class ChangingLanguage extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "English",
+            context.locale.languageCode == 'ar' ? 'العربية' : "English",
             style: AppTextStyles.bold10,
           ),
           PopupMenuButton(
@@ -30,15 +31,21 @@ class ChangingLanguage extends StatelessWidget {
               itemBuilder: (context) {
                 return [
                   PopupMenuItem(
+                      onTap: () {
+                        context.setLocale(Locale('en'));
+                      },
                       child: Text(
-                    "English",
-                    style: AppTextStyles.bold10,
-                  )),
+                        "English",
+                        style: AppTextStyles.bold10,
+                      )),
                   PopupMenuItem(
+                      onTap: () {
+                        context.setLocale(Locale('ar'));
+                      },
                       child: Text(
-                    "العربية",
-                    style: AppTextStyles.bold10,
-                  )),
+                        "العربية",
+                        style: AppTextStyles.bold10,
+                      )),
                 ];
               })
         ],

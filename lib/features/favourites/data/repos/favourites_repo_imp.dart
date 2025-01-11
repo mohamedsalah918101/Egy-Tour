@@ -13,7 +13,7 @@ class FavouritesRepoImp implements FavouritesRepo {
       for (var gov in governmentsList) {
         for (var landmark in gov.landMarkList) {
           if (ids.contains(landmark.uniqueId)) {
-            landmark.isFavorite=true;
+            landmark.isFavorite = true;
             faveList.add(landmark);
           } else {
             continue;

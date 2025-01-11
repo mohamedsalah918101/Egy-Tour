@@ -9,6 +9,12 @@ class SignUpRepoImp implements SignUpRepo {
   @override
   Future<Either<User, String>> signUp(User userModel) async {
     try {
+      List<User> usersList = await service.getAllPerson() as List<User>;
+      for (var item in usersList) {
+        if (item.email == userModel.email) {
+          return right("this email is created before !");
+        }
+      }
       await service.addPerson(userModel);
       return left(userModel);
     } catch (e) {

@@ -88,7 +88,7 @@ class _PlaceCardState extends State<PlaceCard> {
                               .add(widget.landmarkModel.uniqueId)
                           : widget.user?.favorites
                               .remove(widget.landmarkModel.uniqueId);
-                      print(widget.user?.favorites);
+
                       setState(() {});
                     },
                     icon: widget.landmarkModel.isFavorite

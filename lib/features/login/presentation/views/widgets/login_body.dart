@@ -1,4 +1,4 @@
-import 'package:egy_tour/core/utils/constants/constant_variables.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:egy_tour/core/utils/extensions/media_query.dart';
 import 'package:egy_tour/core/utils/extensions/navigation.dart';
 import 'package:egy_tour/core/utils/theme/app_colors.dart';
@@ -19,20 +19,28 @@ class LoginBody extends StatefulWidget {
   const LoginBody({
     super.key,
   });
-
   @override
   State<LoginBody> createState() => _LoginBodyState();
 }
 
 final LoginRepoImp loginRepoImp = LoginRepoImp();
-final _focusNode1 = FocusNode();
-final _focusNode2 = FocusNode();
-final TextEditingController emailController = TextEditingController();
-final TextEditingController passwordController = TextEditingController();
+late FocusNode _focusNode1;
+late FocusNode _focusNode2;
+late TextEditingController emailController;
+late TextEditingController passwordController;
 final formKey = GlobalKey<FormState>();
 bool isObeseureText = false;
 
 class _LoginBodyState extends State<LoginBody> {
+  @override
+  void initState() {
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+    _focusNode1 = FocusNode();
+    _focusNode2 = FocusNode();
+    super.initState();
+  }
+
   @override
   void dispose() {
     emailController.dispose();
@@ -60,11 +68,11 @@ class _LoginBodyState extends State<LoginBody> {
                   height: context.screenHeight * 0.125,
                 ),
                 Text(
-                  "Welcome To Egypt",
+                  "login.welcome_title".tr(),
                   style: AppTextStyles.bold28,
                 ),
                 Text(
-                  secondaryTitle,
+                  "login.welcome_subtitle".tr(),
                   textAlign: TextAlign.center,
                   style:
                       AppTextStyles.regular14.copyWith(color: AppColors.grey21),
@@ -109,34 +117,14 @@ class _LoginBodyState extends State<LoginBody> {
                     _focusNode1.unfocus();
                     _focusNode2.unfocus();
                     if (formKey.currentState!.validate()) {
-                      await loginRepoImp
-                          .checkLogin(User(
-                              userName: "",
-                              email: emailController.text,
-                              password: passwordController.text))
-                          .then((value) {
-                        value.fold((model) {
-                          if (model != null) {
-                            context.pushReplacement(BasicView(
-                              email: emailController.text,
-                            ));
-                          } else {
-                            showCustomSnackBar(
-                                context, "Email or Password is not correct",
-                                backgroundColor: AppColors.red);
-                          }
-                        }, (error) {
-                          showCustomSnackBar(context, error,
-                              backgroundColor: AppColors.red);
-                        });
-                      });
+                      await loginFun(context);
                     }
                   },
-                  title: 'Login',
+                  title: 'login.login_button'.tr(),
                 ),
                 HavingAccountLoginOrSignUp(
-                  mainText: "Don’t have an account?",
-                  actionText: 'Create',
+                  mainText: "login.no_account".tr(),
+                  actionText: 'login.create'.tr(),
                   onTapActionText: () {
                     context.push(SignUpView());
                   },
@@ -148,5 +136,27 @@ class _LoginBodyState extends State<LoginBody> {
         ],
       ),
     );
+  }
+
+  Future<void> loginFun(BuildContext context) async {
+    await loginRepoImp
+        .checkLogin(User(
+            userName: "",
+            email: emailController.text,
+            password: passwordController.text))
+        .then((value) {
+      value.fold((model) {
+        if (model != null) {
+          context.pushReplacement(BasicView(
+            email: model.email,
+          ));
+        } else {
+          showCustomSnackBar(context, "Email or Password is not correct",
+              backgroundColor: AppColors.red);
+        }
+      }, (error) {
+        showCustomSnackBar(context, error, backgroundColor: AppColors.red);
+      });
+    });
   }
 }
