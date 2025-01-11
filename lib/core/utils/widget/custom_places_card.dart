@@ -18,7 +18,7 @@ class _PlaceCardState extends State<PlaceCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(6.0),
       child: Container(
         decoration: BoxDecoration(
           color: AppColors.lightGrey2,

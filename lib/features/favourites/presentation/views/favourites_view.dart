@@ -37,7 +37,7 @@ class _FavouritesViewState extends State<FavouritesView> {
     return GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: 150 / 190,
+          childAspectRatio: 145 / 190,
         ),
         itemCount: favoriteList?.length,
         itemBuilder: (context, index) {
